@@ -1,0 +1,14 @@
+[Unit]
+Description=node simple server
+
+[Service]
+ExecStart=[/path/to/node/executable] [path/to/node-systemd-demo]/server.js
+Restart=always
+User=[yourUserName]
+Group=[yourUserGroup]
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=[/path/to/node-systemd-demo]
+
+[Install]
+WantedBy=multi-user.target

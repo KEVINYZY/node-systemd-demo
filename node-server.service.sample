@@ -1,0 +1,14 @@
+[Unit]
+Description=node simple server
+
+[Service]
+ExecStart=/usr/bin/node /home/ruanyf/project/node-systemd-demo/server.js
+Restart=always
+User=ruanyf
+Group=ruanyf
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/home/ruanyf/project/node-systemd-demo
+
+[Install]
+WantedBy=multi-user.target

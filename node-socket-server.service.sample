@@ -1,0 +1,10 @@
+[Unit]
+Description=node simple server (socket activation)
+
+[Service]
+ExecStart=/usr/bin/node /home/ruanyf/projects/node-systemd-demo/socket-server.js
+User=ruanyf
+Group=ruanyf
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/home/ruanyf/projects/node-systemd-demo

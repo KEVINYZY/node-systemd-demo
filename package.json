@@ -1,0 +1,17 @@
+{
+  "name": "node-systemd-demo",
+  "version": "1.0.0",
+  "description": "This demo is to run a Node app as a daemon with Systemd.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "autoquit": "~0.1.6",
+    "systemd": "~0.2.6"
+  }
+}

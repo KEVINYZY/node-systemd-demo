@@ -1,6 +1,4 @@
-This demo shows you how working with Systemd. We will run a Node app as a daemon.
-
-[`server.js`](https://github.com/ruanyf/node-systemd-demo/blob/master/server.js)
+This demo shows you how working with Systemd. We will run a [Node app](https://github.com/ruanyf/node-systemd-demo/blob/master/server.js) as a daemon.
 
 ```javascript
 var http = require('http');

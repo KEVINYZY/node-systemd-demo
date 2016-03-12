@@ -1,5 +1,21 @@
 This demo shows you how working with Systemd. We will run a Node app as a daemon.
 
+[`server.js`](https://github.com/ruanyf/node-systemd-demo/blob/master/server.js)
+
+```javascript
+var http = require('http');
+
+var hostname = '0.0.0.0';
+var port = 5000;
+
+http.createServer(function(req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World');
+}).listen(port, hostname, function () {
+  console.log('Server running at http://%s:%s/', hostname, port);
+});
+```
+
 ## How to Use
 
 **First step, clone the code.**
@@ -18,7 +34,7 @@ Replace the following placeholders with the real values.
 - `[yourUserName]`
 - `[yourUserGroup]`
 
-For example, if your node executable is `/usr/bin/node`, and path to `node-systemd-demo` is `/tmp/node-systemd-demo`, and both of your user name and your group name is `nobody`, the modified `node-server.service` should look like the following.
+For example, if your node executable is `/usr/bin/node`, and path to `node-systemd-demo` is `/tmp/node-systemd-demo`, and both of your user name and your group name is `nobody`, the modified [`node-server.service`](https://github.com/ruanyf/node-systemd-demo/blob/master/node-server.service) should look like the following.
 
 ```bash
 [Unit]
@@ -50,7 +66,7 @@ $ id -un
 $ id -gn
 ```
 
-**Third step, copy the `node-server.service` into Systemd.**
+**Third step, copy the [`node-server.service`](https://github.com/ruanyf/node-systemd-demo/blob/master/node-server.service) into Systemd.**
 
 ```bash
 $ sudo cp node-server.service /etc/systemd/system
@@ -58,10 +74,11 @@ $ sudo cp node-server.service /etc/systemd/system
 
 **Fourth step, launch the service.**
 
-Reload the unit file.
-
 ```bash
+# reload configure file
 $ sudo systemctl daemon-reload
+
+# start the service
 $ sudo systemctl start node-server
 ```
 
@@ -102,7 +119,7 @@ $ sudo systemctl enable node-server
 
 Now, you have done the above steps, Node listens on the TCP port 5000 and serves requests, and Systemd monitors Node and restarts it when needed. It is the time we try something new.
 
-Systemd has a gread feature called "socket activation".
+Systemd has a great feature called "socket activation".
 
 > [Socket Activation]
 >
@@ -112,7 +129,7 @@ Before doing the following steps, you should ensure the Node service in the prev
 
 **First step, install the dependencies.**
 
-Our `socket-server.js` needs two new modules: [`systemd`](https://www.npmjs.com/package/systemd) and [`autoquit`](https://www.npmjs.com/package/autoquit).
+Our [`socket-server.js`](https://github.com/ruanyf/node-systemd-demo/blob/master/socket-server.js) needs two new modules: [`systemd`](https://www.npmjs.com/package/systemd) and [`autoquit`](https://www.npmjs.com/package/autoquit).
 
 ```javascript
 require('systemd');
@@ -165,7 +182,7 @@ Now you check the status.
 $ sudo systemctl status node-socket-server.socket
 ● node-socket-server.socket
    Loaded: loaded (/etc/systemd/system/node-socket-server.socket; disabled)
-   Active: active (listening) since 四 2016-03-10 20:36:41 CST; 7s ago
+   Active: active (listening) since 2016-03-10 20:36:41 CST; 7s ago
    Listen: [::]:5000 (Stream)
 
 $ sudo systemctl status node-socket-server.service
